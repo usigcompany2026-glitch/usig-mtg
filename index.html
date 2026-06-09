@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="USIG AI - Real Estate & Mortgage Lead Qualification">
+    <meta name="theme-color" content="#001f3f">
+    <title>USIG AI | Real Estate Financing Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">USIG</div>
+            <h1>Real Estate Financing</h1>
+            <p class="tagline">Institutional-Grade Analysis & Qualification</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Loan Type</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Details</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Contact</span>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <form id="leadForm" class="lead-form" novalidate>
+                
+                <!-- STEP 1: LOAN TYPE SELECTION -->
+                <section class="form-step active" data-step="1">
+                    <h2>What type of financing are you looking for?</h2>
+                    <p class="step-description">We'll tailor our questions to help you get the best analysis.</p>
+
+                    <div class="loan-type-selector">
+                        <div class="loan-option">
+                            <input 
+                                type="radio" 
+                                id="loanType_cre" 
+                                name="loanType" 
+                                value="cre" 
+                                required
+                            >
+                            <label for="loanType_cre" class="loan-option-label">
+                                <span class="option-title">Commercial Real Estate</span>
+                                <span class="option-desc">Retail, Office, Industrial, Multifamily, Hospitality, Development</span>
+                            </label>
+                        </div>
+
+                        <div class="loan-option">
+                            <input 
+                                type="radio" 
+                                id="loanType_residential" 
+                                name="loanType" 
+                                value="residential" 
+                                required
+                            >
+                            <label for="loanType_residential" class="loan-option-label">
+                                <span class="option-title">Residential</span>
+                                <span class="option-desc">Purchase, Refinance, Cash-Out, Investment Property</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+                </section>
+
+                <!-- STEP 2A: CRE DETAILS -->
+                <section class="form-step" data-step="2" data-loan-type="cre">
+                    <h2>Commercial Real Estate Financing</h2>
+                    
+                    <!-- Personal Info -->
+                    <fieldset class="form-group">
+                        <legend>Your Information</legend>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="firstName_cre">First Name *</label>
+                                <input type="text" id="firstName_cre" name="firstName" required placeholder="John">
+                            </div>
+                            <div class="form-field">
+                                <label for="lastName_cre">Last Name *</label>
+                                <input type="text" id="lastName_cre" name="lastName" required placeholder="Smith">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="email_cre">Email *</label>
+                                <input type="email" id="email_cre" name="email" required placeholder="john@example.com">
+                            </div>
+                            <div class="form-field">
+                                <label for="phone_cre">Phone *</label>
+                                <input type="tel" id="phone_cre" name="phone" required placeholder="(949) 555-0100">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Investor Profile -->
+                    <fieldset class="form-group">
+                        <legend>Investor Profile</legend>
+                        <div class="form-field">
+                            <label>Investor Type *</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="investorType_individual" name="investorTypes" value="individual">
+                                    <label for="investorType_individual">Individual Investor</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="investorType_llc" name="investorTypes" value="llc">
+                                    <label for="investorType_llc">LLC / Partnership</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="investorType_fund" name="investorTypes" value="fund">
+                                    <label for="investorType_fund">Investment Fund / Syndication</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="yearsExperience">Years Investment Experience *</label>
+                                <select id="yearsExperience" name="yearsExperience" required>
+                                    <option value="">Select experience level</option>
+                                    <option value="0-2">0-2 years (New investor)</option>
+                                    <option value="2-5">2-5 years</option>
+                                    <option value="5-10">5-10 years</option>
+                                    <option value="10plus">10+ years (Seasoned)</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="portfolioSize">Portfolio Size (estimated) *</label>
+                                <select id="portfolioSize" name="portfolioSize" required>
+                                    <option value="">Select range</option>
+                                    <option value="1-5m">$1M - $5M</option>
+                                    <option value="5-25m">$5M - $25M</option>
+                                    <option value="25-100m">$25M - $100M</option>
+                                    <option value="100m-plus">$100M+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Property Details -->
+                    <fieldset class="form-group">
+                        <legend>Property Details</legend>
+                        <div class="form-field">
+                            <label for="crePropertyType">Property Type *</label>
+                            <select id="crePropertyType" name="propertyType" required>
+                                <option value="">Select property type</option>
+                                <option value="retail">Retail (Class A/B/C)</option>
+                                <option value="office">Office</option>
+                                <option value="industrial">Industrial / Warehouse</option>
+                                <option value="multifamily">Multifamily (5+ units)</option>
+                                <option value="hospitality">Hospitality / Lodging</option>
+                                <option value="development">Development Land</option>
+                                <option value="mixed-use">Mixed-Use</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="squareFootage">Square Footage *</label>
+                                <input type="number" id="squareFootage" name="squareFootage" required placeholder="50000" min="1000">
+                            </div>
+                            <div class="form-field">
+                                <label for="yearBuilt">Year Built / Renovated *</label>
+                                <input type="number" id="yearBuilt" name="yearBuilt" required placeholder="2015" min="1900" max="2026">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="creLocation">Address / County *</label>
+                            <input type="text" id="creLocation" name="location" required placeholder="123 Main St, Orange County, CA">
+                        </div>
+                    </fieldset>
+
+                    <!-- Financing Details -->
+                    <fieldset class="form-group">
+                        <legend>Financing Requirements</legend>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="purchasePrice">Purchase Price / Current Value *</label>
+                                <input type="number" id="purchasePrice" name="purchasePrice" required placeholder="5000000" min="1000000" step="100000">
+                            </div>
+                            <div class="form-field">
+                                <label for="loanAmount">Desired Loan Amount *</label>
+                                <input type="number" id="loanAmount" name="loanAmount" required placeholder="3500000" min="1000000" step="100000">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="ltv">LTV (%) *</label>
+                                <input type="number" id="ltv" name="ltv" required placeholder="70" min="0" max="100" step="5">
+                            </div>
+                            <div class="form-field">
+                                <label for="dscr">Est. DSCR *</label>
+                                <input type="number" id="dscr" name="dscr" required placeholder="1.25" min="0.5" max="5" step="0.05">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="creNoi">Annual NOI (estimated) *</label>
+                                <input type="number" id="creNoi" name="noi" required placeholder="700000" step="10000">
+                            </div>
+                            <div class="form-field">
+                                <label for="capRate">Cap Rate (estimated) *</label>
+                                <input type="number" id="capRate" name="capRate" required placeholder="5.5" min="0.5" max="20" step="0.25">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Loan Purpose -->
+                    <fieldset class="form-group">
+                        <legend>Loan Purpose & Strategy</legend>
+                        <div class="form-field">
+                            <label>Purpose *</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="purpose_acquisition" name="loanPurpose" value="acquisition">
+                                    <label for="purpose_acquisition">Acquisition</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="purpose_refinance" name="loanPurpose" value="refinance">
+                                    <label for="purpose_refinance">Refinance</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="purpose_cashout" name="loanPurpose" value="cash-out">
+                                    <label for="purpose_cashout">Cash-Out</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="purpose_construction" name="loanPurpose" value="construction">
+                                    <label for="purpose_construction">Construction / Development</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="purpose_bridge" name="loanPurpose" value="bridge">
+                                    <label for="purpose_bridge">Bridge / Interim Financing</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="exitStrategy">Exit Strategy / Hold Period *</label>
+                            <select id="exitStrategy" name="exitStrategy" required>
+                                <option value="">Select strategy</option>
+                                <option value="hold-long">Long-term hold (10+ years)</option>
+                                <option value="hold-medium">Medium-term hold (5-10 years)</option>
+                                <option value="value-add">Value-add (3-5 years, repositioning)</option>
+                                <option value="fix-flip">Fix & flip (1-2 years)</option>
+                                <option value="development">Development / Stabilization</option>
+                                <option value="uncertain">Flexible / Uncertain</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="timeline">Timeline *</label>
+                            <select id="timeline" name="timeline" required>
+                                <option value="">Select timeline</option>
+                                <option value="0-30">0-30 days (urgent)</option>
+                                <option value="30-60">30-60 days</option>
+                                <option value="60-90">60-90 days</option>
+                                <option value="90-180">90-180 days</option>
+                                <option value="180-plus">180+ days (planning)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Loan Type Preference -->
+                    <fieldset class="form-group">
+                        <legend>Loan Type Preferences</legend>
+                        <div class="form-field">
+                            <label>Interested In *</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="loanType_conventional" name="loanTypes" value="conventional">
+                                    <label for="loanType_conventional">Conventional (Agency)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="loanType_dscr" name="loanTypes" value="dscr">
+                                    <label for="loanType_dscr">DSCR (Non-QM)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="loanType_bridge" name="loanTypes" value="bridge">
+                                    <label for="loanType_bridge">Bridge Loan</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="loanType_construction" name="loanTypes" value="construction">
+                                    <label for="loanType_construction">Construction Loan</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="loanType_hardmoney" name="loanTypes" value="hard-money">
+                                    <label for="loanType_hardmoney">Hard Money</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="loanType_mezzanine" name="loanTypes" value="mezzanine">
+                                    <label for="loanType_mezzanine">Mezzanine / Equity</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Additional Details -->
+                    <fieldset class="form-group">
+                        <legend>Additional Details</legend>
+                        <div class="form-field">
+                            <label for="creNotes">Notes / Deal Summary</label>
+                            <textarea id="creNotes" name="additionalDetails" placeholder="Value-add opportunity? Recent renovations? Lease-up phase? Tell us about the deal..." rows="4"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Continue to Contact</button>
+                    </div>
+                </section>
+
+                <!-- STEP 2B: RESIDENTIAL DETAILS -->
+                <section class="form-step" data-step="2" data-loan-type="residential">
+                    <h2>Residential Mortgage Application</h2>
+                    <p class="step-description">We'll collect information similar to a 1003 application to provide the best analysis.</p>
+
+                    <!-- Personal Info -->
+                    <fieldset class="form-group">
+                        <legend>Borrower Information</legend>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="firstName_res">First Name *</label>
+                                <input type="text" id="firstName_res" name="firstName" required placeholder="John">
+                            </div>
+                            <div class="form-field">
+                                <label for="lastName_res">Last Name *</label>
+                                <input type="text" id="lastName_res" name="lastName" required placeholder="Smith">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="email_res">Email *</label>
+                                <input type="email" id="email_res" name="email" required placeholder="john@example.com">
+                            </div>
+                            <div class="form-field">
+                                <label for="phone_res">Phone *</label>
+                                <input type="tel" id="phone_res" name="phone" required placeholder="(949) 555-0100">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="maritalStatus">Marital Status</label>
+                            <select id="maritalStatus" name="maritalStatus">
+                                <option value="">Select</option>
+                                <option value="married">Married</option>
+                                <option value="single">Single</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Loan Purpose -->
+                    <fieldset class="form-group">
+                        <legend>Loan Purpose</legend>
+                        <div class="form-field">
+                            <label>Purpose *</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="purpose_purchase" name="loanPurpose" value="purchase" required>
+                                    <label for="purpose_purchase">Purchase</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="purpose_refi" name="loanPurpose" value="refinance" required>
+                                    <label for="purpose_refi">Refinance (Rate/Term)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="purpose_cashout_res" name="loanPurpose" value="cash-out" required>
+                                    <label for="purpose_cashout_res">Cash-Out Refinance</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label>Property Type *</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="propType_sf" name="propertyType" value="single-family" required>
+                                    <label for="propType_sf">Single Family (1 unit)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="propType_condo" name="propertyType" value="condo" required>
+                                    <label for="propType_condo">Condo</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="propType_townhome" name="propertyType" value="townhome" required>
+                                    <label for="propType_townhome">Townhome</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="propType_2-4" name="propertyType" value="2-4-unit" required>
+                                    <label for="propType_2-4">2-4 Unit</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="propType_mf" name="propertyType" value="multifamily" required>
+                                    <label for="propType_mf">Multifamily (5+)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label>Owner-Occupied? *</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="ownerOcc_yes" name="ownerOccupied" value="yes" required>
+                                    <label for="ownerOcc_yes">Yes (Primary Residence)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="ownerOcc_no" name="ownerOccupied" value="no" required>
+                                    <label for="ownerOcc_no">No (Investment Property)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Property Details -->
+                    <fieldset class="form-group">
+                        <legend>Property Details</legend>
+                        <div class="form-field">
+                            <label for="resLocation">Property Address *</label>
+                            <input type="text" id="resLocation" name="location" required placeholder="123 Main St, Orange County, CA">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="propertyValue">Estimated Property Value *</label>
+                                <input type="number" id="propertyValue" name="propertyValue" required placeholder="500000" min="100000" step="10000">
+                            </div>
+                            <div class="form-field">
+                                <label for="yearBuilt_res">Year Built *</label>
+                                <input type="number" id="yearBuilt_res" name="yearBuilt" required placeholder="2005" min="1900" max="2026">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="beds">Bedrooms *</label>
+                                <input type="number" id="beds" name="bedrooms" required placeholder="3" min="0" max="10">
+                            </div>
+                            <div class="form-field">
+                                <label for="baths">Bathrooms *</label>
+                                <input type="number" id="baths" name="bathrooms" required placeholder="2" min="0" max="10" step="0.5">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Loan Details -->
+                    <fieldset class="form-group">
+                        <legend>Loan Details</legend>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="loanAmount_res">Desired Loan Amount *</label>
+                                <input type="number" id="loanAmount_res" name="loanAmount" required placeholder="400000" min="100000" step="10000">
+                            </div>
+                            <div class="form-field">
+                                <label for="downPaymentPercent">Down Payment (%) *</label>
+                                <input type="number" id="downPaymentPercent" name="downPaymentPercent" required placeholder="20" min="0" max="100" step="5">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="creditScore">Estimated Credit Score *</label>
+                                <select id="creditScore" name="creditScore" required>
+                                    <option value="">Select range</option>
+                                    <option value="less-620">Less than 620</option>
+                                    <option value="620-640">620-640</option>
+                                    <option value="640-680">640-680</option>
+                                    <option value="680-740">680-740</option>
+                                    <option value="740-plus">740+</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="loanTerm">Loan Term Preference *</label>
+                                <select id="loanTerm" name="loanTerm" required>
+                                    <option value="">Select term</option>
+                                    <option value="10">10 years</option>
+                                    <option value="15">15 years</option>
+                                    <option value="20">20 years</option>
+                                    <option value="30">30 years</option>
+                                    <option value="flexible">Flexible / Open</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Financial / Employment -->
+                    <fieldset class="form-group">
+                        <legend>Financial Information</legend>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="employmentStatus">Employment Status *</label>
+                                <select id="employmentStatus" name="employmentStatus" required>
+                                    <option value="">Select</option>
+                                    <option value="employed">Employed (W2)</option>
+                                    <option value="self-employed">Self-Employed</option>
+                                    <option value="retired">Retired</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="annualIncome">Annual Income (estimated) *</label>
+                                <input type="number" id="annualIncome" name="annualIncome" required placeholder="150000" min="0" step="10000">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="dti">Current Debt-to-Income (estimated) *</label>
+                            <select id="dti" name="dti" required>
+                                <option value="">Select range</option>
+                                <option value="less-20">Less than 20%</option>
+                                <option value="20-30">20-30%</option>
+                                <option value="30-40">30-40%</option>
+                                <option value="40-50">40-50%</option>
+                                <option value="greater-50">Greater than 50%</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Timeline -->
+                    <fieldset class="form-group">
+                        <legend>Timeline</legend>
+                        <div class="form-field">
+                            <label for="timeline_res">When do you need financing? *</label>
+                            <select id="timeline_res" name="timeline" required>
+                                <option value="">Select timeline</option>
+                                <option value="0-30">0-30 days (urgent)</option>
+                                <option value="30-60">30-60 days</option>
+                                <option value="60-90">60-90 days</option>
+                                <option value="90-plus">90+ days (planning)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Additional Notes -->
+                    <fieldset class="form-group">
+                        <legend>Additional Information</legend>
+                        <div class="form-field">
+                            <label for="resNotes">Notes (bankruptcy, recent foreclosure, short sale, etc.)</label>
+                            <textarea id="resNotes" name="additionalDetails" placeholder="Any relevant details that help us understand your situation..." rows="4"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Continue to Contact</button>
+                    </div>
+                </section>
+
+                <!-- STEP 3: CONTACT & CONSENT -->
+                <section class="form-step" data-step="3">
+                    <h2>Confirm Your Information</h2>
+                    <p class="step-description">Review your details and agree to be contacted.</p>
+
+                    <div class="review-section">
+                        <div class="review-item">
+                            <span class="review-label">Name:</span>
+                            <span id="reviewName" class="review-value">—</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Email:</span>
+                            <span id="reviewEmail" class="review-value">—</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Phone:</span>
+                            <span id="reviewPhone" class="review-value">—</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Loan Type:</span>
+                            <span id="reviewLoanType" class="review-value">—</span>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <legend>Consent & Communication</legend>
+                        <div class="checkbox-item checkbox-consent">
+                            <input 
+                                type="checkbox" 
+                                id="consent" 
+                                name="consent" 
+                                required
+                            >
+                            <label for="consent">
+                                I agree to be contacted by USIG AI regarding my financing inquiry via phone, email, SMS, and AI conversation. I understand my information will be stored securely and used only for underwriting and follow-up.
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+                        <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+                    </div>
+
+                    <!-- Status Messages -->
+                    <div id="successMessage" class="message message-success" style="display: none;">
+                        ✓ Your application has been received. We'll analyze your details and contact you within 24 hours.
+                    </div>
+                    <div id="errorMessage" class="message message-error" style="display: none;">
+                        ⚠ There was an error submitting your application. Please try again.
+                    </div>
+                </section>
+
+            </form>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 USIG AI. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

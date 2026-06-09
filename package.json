@@ -1,0 +1,15 @@
+{
+  "name": "usig-mortgage-pwa",
+  "version": "1.0.0",
+  "description": "USIG Mortgage Lead Capture PWA with GHL Integration",
+  "main": "index.html",
+  "dependencies": {
+    "node-fetch": "^2.6.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brenda Le Jones",
+  "license": "MIT"
+}
